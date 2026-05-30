@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emanuele De Benedictis — Consulente Marketing & Offerte per PMI</title>
+  <meta name="description" content="Aiuto le PMI italiane a costruire offerte che convertono e sistemi di marketing che generano clienti. Consulenza, copywriting e funnel orientati ai risultati." />
+
+  <!-- Open Graph (anteprima quando condividi il link) -->
+  <meta property="og:title" content="Emanuele De Benedictis — Consulente Marketing & Offerte" />
+  <meta property="og:description" content="Offerte che convertono e sistemi di marketing per PMI italiane." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://emanueledebenedictis.com" />
+  <meta property="og:locale" content="it_IT" />
+
+  <!-- Favicon (le iniziali EDB su sfondo blu, in SVG inline) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%233B82F6'/><text x='50' y='68' font-family='Arial' font-size='46' font-weight='700' fill='white' text-anchor='middle'>E</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===========================================================
+       PALETTE  (modifica qui i colori di tutto il sito)
+       =========================================================== */
+    :root {
+      --primary:   #000000;
+      --secondary: #ffffff;
+      --accent:    #3B82F6;
+      --bg:        #0F0F0F;
+      --bg-soft:   #171717;
+      --text:      #F5F5F5;
+      --text-dim:  #A1A1AA;
+      --border:    rgba(255,255,255,0.08);
+      --radius:    16px;
+      --max:       1080px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* ===========================  NAV  =========================== */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(15,15,15,0.72);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .brand { font-weight: 700; letter-spacing: -0.02em; font-size: 1.05rem; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: var(--text-dim); font-size: 0.92rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* ===========================  HERO  =========================== */
+    .hero { padding: 110px 0 90px; position: relative; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 680px; height: 680px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.18), transparent 60%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 22px;
+    }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 22px;
+    }
+    .hero h1 .accent { color: var(--accent); }
+    .hero p.lead {
+      font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+      color: var(--text-dim); max-width: 620px; margin-bottom: 36px;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 14px 26px; border-radius: 999px; font-weight: 600; font-size: 0.98rem;
+      transition: transform .15s ease, background .2s, border-color .2s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { transform: translateY(-2px); background: #2f74e8; }
+    .btn-ghost { border: 1px solid var(--border); color: var(--text); }
+    .btn-ghost:hover { transform: translateY(-2px); border-color: var(--accent); }
+
+    /* ===========================  SEZIONI  =========================== */
+    section { padding: 80px 0; }
+    .section-tag { font-size: 0.82rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+    .section-title { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 18px; }
+    .section-intro { color: var(--text-dim); max-width: 640px; font-size: 1.05rem; }
+
+    /* CHI SONO */
+    .about { border-top: 1px solid var(--border); }
+    .about p + p { margin-top: 18px; }
+    .about .section-intro { max-width: 760px; }
+    .about-grid { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 52px; align-items: center; }
+    .about-photo { position: relative; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 24px 70px rgba(0,0,0,0.45); }
+    .about-photo img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .about-photo::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 -60px 80px -40px rgba(15,15,15,0.6); pointer-events: none; }
+    @media (max-width: 760px) {
+      .about-grid { grid-template-columns: 1fr; gap: 30px; }
+      .about-photo { max-width: 300px; margin: 0 auto; }
+    }
+
+    /* SERVIZI */
+    .services { border-top: 1px solid var(--border); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 44px; }
+    .card {
+      background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 30px 26px; transition: transform .18s ease, border-color .2s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(59,130,246,0.45); }
+    .card .ico {
+      width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+      background: rgba(59,130,246,0.12); color: var(--accent); font-size: 1.4rem; margin-bottom: 18px;
+    }
+    .card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
+    .card p { color: var(--text-dim); font-size: 0.96rem; }
+
+    /* APPROCCIO */
+    .approach { border-top: 1px solid var(--border); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 44px; }
+    .step .num { font-size: 2.2rem; font-weight: 800; color: var(--accent); letter-spacing: -0.03em; }
+    .step h3 { font-size: 1.1rem; font-weight: 600; margin: 8px 0 8px; }
+    .step p { color: var(--text-dim); font-size: 0.96rem; }
+
+    /* CONTATTO */
+    .contact { border-top: 1px solid var(--border); text-align: center; }
+    .contact .section-title { margin-bottom: 14px; }
+    .contact p.sub { color: var(--text-dim); max-width: 520px; margin: 0 auto 32px; font-size: 1.05rem; }
+    .mail-link { font-size: clamp(1.3rem, 4vw, 2rem); font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+    .mail-link:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 36px 0; }
+    .foot { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; }
+    .foot small { color: var(--text-dim); }
+    .foot .socials { display: flex; gap: 20px; }
+    .foot .socials a { color: var(--text-dim); font-size: 0.9rem; transition: color .2s; }
+    .foot .socials a:hover { color: var(--text); }
+
+    /* Animazione di entrata */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.show { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+
+<body>
+  <!-- ============================  NAV  ============================ -->
+  <header>
+    <div class="wrap nav">
+      <div class="brand">Emanuele <span>De Benedictis</span></div>
+      <nav class="nav-links">
+        <a href="#chi-sono">Chi sono</a>
+        <a href="#servizi">Servizi</a>
+        <a href="#approccio">Approccio</a>
+        <a href="#contatto">Contatti</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================  HERO  ============================ -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow reveal">Consulente Marketing &amp; Offerte</span>
+      <h1 class="reveal">Offerte che <span class="accent">convertono</span>,<br />marketing che porta clienti.</h1>
+      <p class="lead reveal">Aiuto le PMI italiane a trasformare il proprio messaggio in un sistema commerciale che genera richieste qualificate — con offerte irresistibili, copy persuasivo e funnel costruiti per i risultati.</p>
+      <div class="cta-row reveal">
+        <a class="btn btn-primary" href="#contatto">Parliamo del tuo progetto →</a>
+        <a class="btn btn-ghost" href="#servizi">Cosa posso fare per te</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================  CHI SONO  ============================ -->
+  <section class="about" id="chi-sono">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-photo reveal">
+          <img src="foto.jpg" alt="Emanuele De Benedictis, consulente marketing" width="760" height="950" loading="lazy" />
+        </div>
+        <div class="about-text">
+          <div class="section-tag reveal">Chi sono</div>
+          <h2 class="section-title reveal">Marketing concreto, pensato per chi fa impresa.</h2>
+          <div class="section-intro reveal">
+            <p>Sono Emanuele De Benedictis, consulente specializzato in <strong>offerte e marketing a risposta diretta</strong> per piccole e medie imprese. Non vendo "visibilità": costruisco sistemi che trasformano l'attenzione in clienti reali.</p>
+            <p>Lavoro al fianco degli imprenditori per chiarire il posizionamento, rendere l'offerta impossibile da ignorare e mettere a terra campagne che si misurano in richieste e vendite — non in like.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================  SERVIZI  ============================ -->
+  <section class="services" id="servizi">
+    <div class="wrap">
+      <div class="section-tag reveal">Servizi</div>
+      <h2 class="section-title reveal">Cosa posso fare per te</h2>
+      <p class="section-intro reveal">Tre aree di intervento, un unico obiettivo: farti acquisire clienti in modo prevedibile.</p>
+
+      <div class="cards">
+        <div class="card reveal">
+          <div class="ico">◎</div>
+          <h3>Offerta che converte</h3>
+          <p>Costruiamo un'offerta chiara, differenziante e irresistibile: il cuore di ogni vendita. Dal posizionamento al meccanismo unico che ti rende l'unica scelta sensata.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ico">✎</div>
+          <h3>Copy &amp; messaggio</h3>
+          <p>Pagine di vendita, email e annunci scritti per persuadere. Trasformo le caratteristiche del tuo prodotto in motivi concreti per cui il cliente compra ora.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ico">⤳</div>
+          <h3>Funnel &amp; campagne</h3>
+          <p>Progetto il percorso che porta lo sconosciuto a diventare cliente: dalla prima inserzione fino alla richiesta di contatto, misurando ogni passaggio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================  APPROCCIO  ============================ -->
+  <section class="approach" id="approccio">
+    <div class="wrap">
+      <div class="section-tag reveal">Approccio</div>
+      <h2 class="section-title reveal">Come lavoriamo insieme</h2>
+      <p class="section-intro reveal">Un metodo in tre fasi, senza fuffa e con risultati misurabili.</p>
+
+      <div class="steps">
+        <div class="step reveal">
+          <div class="num">01</div>
+          <h3>Analisi</h3>
+          <p>Studio il tuo mercato, i clienti e la concorrenza per capire dove sei davvero forte e cosa ti frena.</p>
+        </div>
+        <div class="step reveal">
+          <div class="num">02</div>
+          <h3>Strategia</h3>
+          <p>Definiamo offerta, messaggio e funnel: un piano chiaro e su misura, pronto da eseguire.</p>
+        </div>
+        <div class="step reveal">
+          <div class="num">03</div>
+          <h3>Esecuzione</h3>
+          <p>Mettiamo a terra le campagne, misuriamo i numeri e ottimizziamo finché non funzionano.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================  CONTATTO  ============================ -->
+  <section class="contact" id="contatto">
+    <div class="wrap">
+      <div class="section-tag reveal" style="display:inline-block">Contatti</div>
+      <h2 class="section-title reveal">Hai un progetto in mente?</h2>
+      <p class="sub reveal">Raccontami a che punto sei. Ti rispondo personalmente e ti dico, in modo onesto, se e come posso esserti utile.</p>
+      <a class="mail-link reveal" href="mailto:ema@emanueledebenedictis.com">ema@emanueledebenedictis.com</a>
+    </div>
+  </section>
+
+  <!-- ============================  FOOTER  ============================ -->
+  <footer>
+    <div class="wrap foot">
+      <small>© 2026 Emanuele De Benedictis · P.IVA da inserire</small>
+      <div class="socials">
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:ema@emanueledebenedictis.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Rivela gli elementi con un leggero stagger mentre scorri
+    const items = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          e.target.style.transitionDelay = (e.target.closest('.cards, .steps') ? (i % 3) * 90 : 0) + 'ms';
+          e.target.classList.add('show');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    items.forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>

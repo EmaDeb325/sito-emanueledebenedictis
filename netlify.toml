@@ -1,0 +1,13 @@
+# Configurazione Netlify — emanueledebenedictis.com
+# Sito statico: nessuna "build", si pubblica l'intera cartella.
+
+[build]
+  publish = "."
+
+# Header di sicurezza di base
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

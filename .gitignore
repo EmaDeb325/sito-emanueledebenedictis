@@ -1,0 +1,11 @@
+# File di sistema / editor da NON caricare online
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.vscode/
+.idea/
+node_modules/
+
+# Foto originale pesante (sul sito usiamo foto.jpg ottimizzata)
+foto_emanuele.jpg
