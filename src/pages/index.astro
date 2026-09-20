@@ -100,7 +100,7 @@ const fasi = [
     intro="Gli articoli che leggi qui, i video, i reel, le campagne dei miei clienti: li produce una persona sola, con Lucia. Ogni pezzo nasce una volta e vive su quattro canali. Non te lo racconto: te lo faccio vedere, pezzo per pezzo."
     sfondo={true}
   >
-    <div style="margin-top: 34px;"><FlussoContenuti quanti={3} /></div>
+    <div style="margin-top: 34px;"><FlussoContenuti quanti={3} messaggioSeVuoto={false} /></div>
     <p style="margin-top: 28px;">
       <a href="/idee" class="btn btn-secondario">Guarda cosa produce Lucia</a>
     </p>
@@ -110,7 +110,9 @@ const fasi = [
     titolo="Sistemi che si vedono funzionare"
     intro="Non presentazioni: cose accese. Le trovi spiegate una per una, con il video di cosa fanno davvero."
   >
-    <div class="griglia griglia-3">{primeMacchine.map((m) => <CardMacchina macchina={m} />)}</div>
+    {primeMacchine.length > 0 && (
+      <div class="griglia griglia-3">{primeMacchine.map((m) => <CardMacchina macchina={m} />)}</div>
+    )}
     <p style="margin-top: 28px;">
       <a href="/macchine" class="btn btn-secondario">Entra nella sala macchine</a>
     </p>
@@ -121,7 +123,9 @@ const fasi = [
     titolo="Aziende vere, lavori veri"
     intro="Racconto le situazioni per categoria di attività, senza nomi: chi si riconosce, si riconosce."
   >
-    <div class="griglia griglia-3">{primiCasi.map((c) => <CardCaso caso={c} />)}</div>
+    {primiCasi.length > 0 && (
+      <div class="griglia griglia-3">{primiCasi.map((c) => <CardCaso caso={c} />)}</div>
+    )}
     <p style="margin-top: 28px;">
       <a href="/casi" class="btn btn-secondario">Leggi i casi</a>
     </p>

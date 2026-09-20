@@ -17,6 +17,10 @@ const casi = (await getCollection('casi', ({ data }) => !data.draft))
     titolo="Aziende vere, lavori veri"
     intro="Racconto le situazioni per categoria di attività, senza nomi. Dove il risultato non è ancora misurato lo dico, e spiego cosa è stato consegnato."
   >
-    <div class="griglia griglia-3">{casi.map((c) => <CardCaso caso={c} />)}</div>
+    {casi.length === 0 ? (
+      <p class="tenue">I primi casi arrivano a breve.</p>
+    ) : (
+      <div class="griglia griglia-3">{casi.map((c) => <CardCaso caso={c} />)}</div>
+    )}
   </Sezione>
 </Base>

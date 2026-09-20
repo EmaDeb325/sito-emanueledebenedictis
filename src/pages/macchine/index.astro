@@ -17,6 +17,10 @@ const macchine = (await getCollection('macchine', ({ data }) => !data.draft))
     titolo="Sistemi che si vedono funzionare"
     intro="Non presentazioni: cose accese. Ognuna è un pezzo di Lucia che puoi avere anche tu."
   >
-    <div class="griglia griglia-3">{macchine.map((m) => <CardMacchina macchina={m} />)}</div>
+    {macchine.length === 0 ? (
+      <p class="tenue">Le prime macchine arrivano a breve.</p>
+    ) : (
+      <div class="griglia griglia-3">{macchine.map((m) => <CardMacchina macchina={m} />)}</div>
+    )}
   </Sezione>
 </Base>
