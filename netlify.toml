@@ -1,10 +1,10 @@
-# Configurazione Netlify — emanueledebenedictis.com
-# Sito statico: nessuna "build", si pubblica l'intera cartella.
+# Configurazione Netlify · emanueledebenedictis.com
+# Sito generato con Astro: Netlify compila e pubblica la cartella dist.
 
 [build]
-  publish = "."
+  command = "npm run build"
+  publish = "dist"
 
-# Header di sicurezza di base
 [[headers]]
   for = "/*"
   [headers.values]

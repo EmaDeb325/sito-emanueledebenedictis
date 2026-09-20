@@ -15,3 +15,6 @@ foto_emanuele.jpg
 
 # Output della build Astro (lo genera Netlify)
 dist/
+
+# Cache e tipi generati da Astro in locale (astro dev / astro build / astro sync)
+.astro/
