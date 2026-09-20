@@ -1,4 +1,4 @@
-/* motion.css — movimento del sito, prodotto dalla skill transitions-dev.
+/* motion.css: movimento del sito, prodotto dalla skill transitions-dev.
    Ogni blocco rispetta prefers-reduced-motion: chi lo richiede non vede
    animazioni. Il testo principale dell'hero non riceve mai classi di
    movimento: resta leggibile all'istante. */
