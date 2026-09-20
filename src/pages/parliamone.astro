@@ -20,6 +20,7 @@ import Sezione from '../components/Sezione.astro';
       class="card modulo blocco"
     >
       <input type="hidden" name="bot-field" />
+      <input type="hidden" name="form-name" value="call" />
 
       <div class="campo">
         <label for="nome">Nome e cognome</label>
@@ -65,6 +66,10 @@ import Sezione from '../components/Sezione.astro';
       <p class="tenue nota-privacy">
         Quello che scrivi serve solo a risponderti: non finisce in nessuna lista e non lo cedo a
         nessuno. <a href="/privacy">Come tratto i dati.</a>
+      </p>
+
+      <p class="tenue nota-privacy">
+        Preferisci la posta? Scrivimi a <a href="mailto:ema@emanueledebenedictis.com">ema@emanueledebenedictis.com</a>
       </p>
     </form>
   </Sezione>
