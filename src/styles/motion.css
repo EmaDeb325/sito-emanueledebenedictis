@@ -12,8 +12,8 @@
    figlio riceve .t-stagger-line e un modificatore .t-stagger-line--N;
    un IntersectionObserver (da collegare nel task che introduce gli
    elementi reali) aggiunge .is-shown quando il blocco entra nel
-   viewport. Finche' nessun elemento usa queste classi, il blocco resta
-   inerte: non tocca nulla del markup gia' pubblicato.
+   viewport. Finché nessun elemento usa queste classi, il blocco resta
+   inerte: non tocca nulla del markup già pubblicato.
    --------------------------------------------------------------------- */
 :root {
   --stagger-dur: 500ms;
@@ -46,7 +46,7 @@
   filter: blur(0);
 }
 /* Uscita disaccoppiata dallo stagger: un'unica dissolvenza silenziosa,
-   senza ritorno in Y e senza blur, cosi' la scomparsa non sembra una
+   senza ritorno in Y e senza blur, così la scomparsa non sembra una
    rivelazione al contrario. */
 .t-stagger.is-hiding .t-stagger-line {
   opacity: 0;
@@ -74,7 +74,7 @@
    distanza, pensata per una fila orizzontale (avatar, chip); le nostre
    .card sono tessere indipendenti in griglia, quindi teniamo solo il
    sollevamento della tessera sotto il mouse. Le .card di global.css lo
-   ricevono gia' oggi, senza markup o script aggiuntivi.
+   ricevono già oggi, senza markup o script aggiuntivi.
    --------------------------------------------------------------------- */
 :root {
   --avatar-lift: -4px;
