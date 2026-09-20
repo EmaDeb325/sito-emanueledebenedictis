@@ -1,0 +1,27 @@
+---
+---
+<section class="hero">
+  <div class="wrap">
+    <span class="occhiello">AI applicata alla vendita e al marketing</span>
+    <h1>Fai già il lavoro di dieci persone.<br />È ora che dieci persone lavorino per te.</h1>
+    <p class="intro grande">
+      Costruisco il sistema di vendita e marketing potenziato dall'AI dentro la tua azienda,
+      e lo lascio in casa al tuo team.
+    </p>
+    <div class="bottoni">
+      <a href="/parliamone" class="btn btn-primario">Parliamone</a>
+      <a href="/macchine" class="btn btn-secondario">Guarda le macchine</a>
+    </div>
+  </div>
+  <style>
+    .hero { padding: 104px 0 76px; position: relative; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; top: -220px; left: 50%; transform: translateX(-50%);
+      width: 680px; height: 680px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.18), transparent 60%);
+      pointer-events: none;
+    }
+    .grande { font-size: clamp(1.05rem, 2.2vw, 1.25rem); max-width: 660px; }
+    .bottoni { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+  </style>
+</section>

@@ -1,12 +1,136 @@
 ---
 import Base from '../layouts/Base.astro';
 import Sezione from '../components/Sezione.astro';
+import Hero from '../components/Hero.astro';
+
+const ostacoli = [
+  {
+    titolo: 'Hai chiamato un’agenzia',
+    testo:
+      'Qualche contatto è arrivato, finché pagavi. Il know-how è rimasto da loro: hai affittato dei risultati, non costruito un sistema.',
+  },
+  {
+    titolo: 'Hai comprato uno strumento',
+    testo:
+      'Ora è una voce fra gli abbonamenti. Nessuno l’ha configurato, nessuno lo apre: uno strumento senza un processo è solo un costo fisso.',
+  },
+  {
+    titolo: 'Hai fatto un corso',
+    testo:
+      'Tre giorni di entusiasmo e un quaderno pieno di appunti. Poi è arrivato il lunedì, con i clienti, i fornitori e i preventivi da fare.',
+  },
+  {
+    titolo: 'Hai pensato di assumere',
+    testo:
+      'Una persona brava costa, va trovata, formata e diretta. E a dirigerla saresti tu, che sei già il collo di bottiglia.',
+  },
+];
+
+const fasi = [
+  ['Diagnosi', 'Guardiamo i numeri veri: da dove arrivano i clienti oggi, quanto vale un cliente, cosa si perde per strada.'],
+  ['Offerta', 'Rendiamo la tua offerta chiara e difficile da confrontare solo sul prezzo.'],
+  ['Messaggio', 'Scriviamo cosa dici, a chi lo dici e perché dovrebbe crederti.'],
+  ['La macchina', 'Costruiamo Lucia: gli automatismi che trovano, scaldano e richiamano i contatti al posto tuo.'],
+  ['Misura', 'Un cruscotto che parla di richieste, appuntamenti e fatturato. Non di like.'],
+  ['Passaggio di consegne', 'Le chiavi al tuo team, con istruzioni e formazione. Da lì cammina senza di me.'],
+];
 ---
 <Base
   titolo="Emanuele De Benedictis · AI applicata alla vendita e al marketing"
-  descrizione="Costruisco dentro la tua azienda il sistema di vendita e marketing potenziato dall'AI (intelligenza artificiale), e te lo lascio in casa."
+  descrizione="Costruisco dentro la tua azienda il sistema di vendita e marketing potenziato dall'AI (intelligenza artificiale), e te lo lascio in casa, governato dal tuo team."
 >
-  <Sezione occhiello="AI applicata alla vendita e al marketing">
-    <h1>Fai già il lavoro di dieci persone.<br />È ora che dieci persone lavorino per te.</h1>
+  <Hero />
+
+  <Sezione titolo="Se ti fermi una settimana, si ferma tutto." sfondo={true}>
+    <p class="intro">
+      Le offerte le scrivi tu. Le telefonate di richiamo le fai tu. I preventivi che nessuno ha
+      più ricontattato sono nella tua casella. Il marketing è l’ultima voce della giornata,
+      quindi non si fa mai. Non è disorganizzazione: è che l’azienda è cresciuta attorno a una
+      persona sola. Tu.
+    </p>
+  </Sezione>
+
+  <Sezione
+    titolo="Le quattro strade che hai già provato"
+    intro="Nessuna era sbagliata. Ognuna lasciava fuori il pezzo che conta: un sistema che resta tuo. Non un'agenzia da tenere a libro paga, non l'ennesimo corso che non applicherai: un impianto di AI (intelligenza artificiale) che lavora dentro la tua azienda ed è tuo."
+  >
+    <div class="griglia griglia-2">
+      {ostacoli.map((o) => (
+        <div class="card">
+          <h3>{o.titolo}</h3>
+          <p class="tenue" style="margin-top: 10px;">{o.testo}</p>
+        </div>
+      ))}
+    </div>
+  </Sezione>
+
+  <Sezione
+    occhiello="Come funziona"
+    titolo="Come nasce una Lucia"
+    intro="Lucia è il nome del sistema: un impianto di AI che lavora sulla vendita e sul marketing. La mia la vedi all’opera su questo sito. La tua la costruiamo insieme, e resta in casa tua."
+  >
+    <div class="griglia griglia-3">
+      {fasi.map(([nome, testo], i) => (
+        <div class="card">
+          <span class="occhiello">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{nome}</h3>
+          <p class="tenue" style="margin-top: 10px;">{testo}</p>
+        </div>
+      ))}
+    </div>
+    <p style="margin-top: 28px;">
+      <a href="/metodo" class="btn btn-secondario">Vedi il percorso completo</a>
+    </p>
+  </Sezione>
+
+  <Sezione
+    titolo="Questa pagina è la dimostrazione."
+    intro="Gli articoli che leggi qui, i video, i reel, le campagne dei miei clienti: li produce una persona sola, con Lucia. Ogni pezzo nasce una volta e vive su quattro canali. Non te lo racconto: te lo faccio vedere, pezzo per pezzo."
+    sfondo={true}
+  >
+    <p style="margin-top: 28px;">
+      <a href="/idee" class="btn btn-secondario">Guarda cosa produce Lucia</a>
+    </p>
+  </Sezione>
+
+  <Sezione
+    titolo="Sistemi che si vedono funzionare"
+    intro="Non presentazioni: cose accese. Le trovi spiegate una per una, con il video di cosa fanno davvero."
+  >
+    <p style="margin-top: 28px;">
+      <a href="/macchine" class="btn btn-secondario">Entra nella sala macchine</a>
+    </p>
+  </Sezione>
+
+  <Sezione
+    occhiello="Casi"
+    titolo="Aziende vere, lavori veri"
+    intro="Racconto le situazioni per categoria di attività, senza nomi: chi si riconosce, si riconosce."
+  >
+    <p style="margin-top: 28px;">
+      <a href="/casi" class="btn btn-secondario">Leggi i casi</a>
+    </p>
+  </Sezione>
+
+  <Sezione titolo="Emanuele De Benedictis" sfondo={true}>
+    <p class="intro">
+      Lavoro con titolari di piccole e medie imprese che hanno costruito l’azienda vendendo in
+      prima persona e adesso non riescono più a starci dietro. Non vendo visibilità: costruisco
+      il sistema che porta richieste, lo faccio funzionare con l’AI e poi lo consegno al team,
+      con le istruzioni per governarlo.
+    </p>
+    <p style="margin-top: 24px;">
+      <a href="/chi-sono" class="btn btn-secondario">Come ci sono arrivato</a>
+    </p>
+  </Sezione>
+
+  <Sezione titolo="Parliamone mezz’ora.">
+    <p class="intro">
+      Mi racconti a che punto sei, io ti dico con franchezza se e come posso essere utile.
+      Se non è il caso te lo dico, e ti indico cosa farei al tuo posto.
+    </p>
+    <p style="margin-top: 28px;">
+      <a href="/parliamone" class="btn btn-primario">Prenota la call</a>
+    </p>
   </Sezione>
 </Base>
