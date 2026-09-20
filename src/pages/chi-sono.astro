@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Sezione from '../components/Sezione.astro';
+---
+<Base
+  titolo="Chi sono · Emanuele De Benedictis"
+  descrizione="Lavoro con titolari di piccole e medie imprese che hanno costruito l'azienda vendendo in prima persona e ora non riescono più a starci dietro."
+  attiva="Chi sono"
+>
+  <Sezione occhiello="Chi sono" titolo="Emanuele De Benedictis">
+    <div class="due">
+      <div>
+        <p class="intro">
+          Ho passato anni a costruire offerte e messaggi per piccole e medie imprese: quelle in cui
+          il titolare è anche il commerciale, il preventivista e spesso il tecnico. Il problema non
+          era quasi mai il prodotto. Era che tutto passava da una persona sola.
+        </p>
+        <p class="intro">
+          Poi è arrivata l'AI (intelligenza artificiale), e con lei una possibilità che prima non
+          c'era: far fare a una macchina il lavoro ripetitivo del marketing e della vendita
+          (trovare, scaldare, richiamare, misurare), lasciando alla persona le decisioni e le
+          relazioni. Ho iniziato a costruire questi impianti per i miei clienti. Li chiamo Lucia.
+        </p>
+        <p class="intro">
+          Oggi faccio due cose: costruisco la Lucia di un'azienda, e insegno al suo team a
+          governarla. La seconda conta più della prima, perché è quella che rende il lavoro tuo e
+          non mio.
+        </p>
+        <p class="intro">
+          <strong>Una precisazione, perché è giusto saperlo:</strong> Lucia è un sistema, non una
+          persona. Gli articoli, i video e i reel che vedi nascono dal mio lavoro e vengono
+          prodotti con lei. È esattamente la dimostrazione di quello che vendo: una persona sola
+          che presidia quattro canali.
+        </p>
+        <p style="margin-top: 28px;">
+          <a href="/parliamone" class="btn btn-primario">Parliamone</a>
+        </p>
+      </div>
+      <img src="/foto.jpg" alt="Emanuele De Benedictis" />
+    </div>
+  </Sezione>
+  <style>
+    .due { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; margin-top: 24px; }
+    .due img { width: 100%; border-radius: var(--raggio); border: 1px solid var(--bordo); }
+    .due .intro { margin-top: 0; margin-bottom: 16px; }
+    @media (max-width: 860px) { .due { grid-template-columns: 1fr; } }
+  </style>
+</Base>

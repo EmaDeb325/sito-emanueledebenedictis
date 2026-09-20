@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import Sezione from '../components/Sezione.astro';
+
+const fasi = [
+  {
+    nome: 'Diagnosi',
+    cosa: 'Guardiamo i numeri veri: da dove arrivano i clienti oggi, quanto vale un cliente nel tempo, quante richieste si perdono per strada e in quale punto.',
+    serve: 'Due ore tue e l’accesso a quello che c’è: fatture, elenchi contatti, preventivi fatti.',
+    ottieni: 'La fotografia di dove nasce e dove muore il fatturato.',
+  },
+  {
+    nome: 'Offerta',
+    cosa: 'Rendiamo la tua offerta chiara, completa e difficile da confrontare solo sul prezzo: cosa comprende, per chi è, cosa la rende diversa.',
+    serve: 'Il tuo sapere di mestiere: perché i clienti bravi ti scelgono davvero.',
+    ottieni: 'Un’offerta scritta che puoi presentare senza scontarla.',
+  },
+  {
+    nome: 'Messaggio',
+    cosa: 'Scriviamo cosa dici, a chi lo dici e perché dovrebbe crederti: le convinzioni da costruire nell’ordine giusto, prima di chiedere un appuntamento.',
+    serve: 'Una rilettura tua, per riconoscerti nelle parole.',
+    ottieni: 'I testi da usare su sito, messaggi e campagne.',
+  },
+  {
+    nome: 'La macchina',
+    cosa: 'Costruiamo Lucia: gli automatismi che trovano i contatti, li scaldano, li richiamano e ti passano solo chi è pronto a parlare.',
+    serve: 'Le chiavi degli strumenti che usi già e una persona del team come riferimento.',
+    ottieni: 'Un impianto che gira anche nei giorni in cui tu non ci sei.',
+  },
+  {
+    nome: 'Misura',
+    cosa: 'Mettiamo un cruscotto che parla di richieste, appuntamenti e fatturato, con i numeri che contano e nessuno di quelli che non servono.',
+    serve: 'Dieci minuti a settimana per guardarlo insieme.',
+    ottieni: 'La possibilità di decidere sui dati invece che a sensazione.',
+  },
+  {
+    nome: 'Passaggio di consegne',
+    cosa: 'Consegno le chiavi al tuo team: istruzioni scritte, formazione sul campo e un periodo in cui lavorano loro e io guardo.',
+    serve: 'Qualcuno in azienda che prenda in mano la macchina.',
+    ottieni: 'L’autonomia. Se domani smettiamo, il sistema resta e funziona.',
+  },
+];
+---
+<Base
+  titolo="Come nasce una Lucia · il metodo"
+  descrizione="Le sei fasi con cui costruisco dentro un'azienda il sistema di vendita e marketing potenziato dall'AI (intelligenza artificiale), e poi lo consegno al team."
+  attiva="Metodo"
+>
+  <Sezione
+    occhiello="Il metodo"
+    titolo="Come nasce una Lucia"
+    intro="Lucia è il nome dell'impianto: un sistema di AI (intelligenza artificiale) che lavora sulla vendita e sul marketing. Non è un pacchetto uguale per tutti: si costruisce sui tuoi numeri e resta a casa tua. Sei fasi, in questo ordine, perché ognuna regge la successiva."
+  >
+    <div class="griglia">
+      {fasi.map((f, i) => (
+        <div class="card">
+          <span class="occhiello">Fase {String(i + 1).padStart(2, '0')}</span>
+          <h3>{f.nome}</h3>
+          <p class="tenue" style="margin-top: 10px;">{f.cosa}</p>
+          <p class="tenue" style="margin-top: 14px;"><strong>Cosa serve da te:</strong> {f.serve}</p>
+          <p class="tenue" style="margin-top: 6px;"><strong>Cosa hai in mano alla fine:</strong> {f.ottieni}</p>
+        </div>
+      ))}
+    </div>
+    <p style="margin-top: 34px;">
+      <a href="/parliamone" class="btn btn-primario">Capiamo da quale fase parti</a>
+    </p>
+  </Sezione>
+</Base>
