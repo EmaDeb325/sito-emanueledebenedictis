@@ -16,9 +16,6 @@ const anteprima = new URL('/foto.jpg', Astro.site).href;
 
 const voci = [
   { href: '/metodo', testo: 'Metodo' },
-  { href: '/macchine', testo: 'Macchine' },
-  { href: '/casi', testo: 'Casi' },
-  { href: '/idee', testo: 'Idee' },
   { href: '/chi-sono', testo: 'Chi sono' },
 ];
 ---
@@ -45,12 +42,6 @@ const voci = [
     <meta property="og:image:alt" content="Emanuele De Benedictis" />
     <meta name="twitter:card" content="summary" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <a href="#contenuto" class="salta">Salta al contenuto</a>
@@ -72,7 +63,10 @@ const voci = [
     <footer>
       <div class="wrap piede">
         <small class="tenue">© 2026 Emanuele De Benedictis · P.IVA IT02364660445</small>
-        <a href="mailto:ema@emanueledebenedictis.com">ema@emanueledebenedictis.com</a>
+        <div class="piede-link">
+          <a href="/privacy">Privacy</a>
+          <a href="mailto:ema@emanueledebenedictis.com">ema@emanueledebenedictis.com</a>
+        </div>
       </div>
     </footer>
 
@@ -96,6 +90,7 @@ const voci = [
       .btn-nav { padding: 10px 18px; font-size: 0.9rem; }
       footer { border-top: 1px solid var(--bordo); padding: 34px 0; }
       .piede { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
+      .piede-link { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
 
       /* Sotto 860px il menu spariva del tutto e sul telefono il sito
          restava senza navigazione. Qui l'intestazione va su due righe:

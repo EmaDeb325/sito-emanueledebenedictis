@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import Sezione from '../components/Sezione.astro';
+---
+<Base
+  titolo="Privacy · Emanuele De Benedictis"
+  descrizione="Come tratto i dati di chi mi scrive dal sito."
+>
+  <Sezione titolo="Come tratto i tuoi dati." titoloPrincipale={true}>
+    <div class="testo">
+      <h2>Chi tratta i dati.</h2>
+      <p>
+        Emanuele De Benedictis, partita IVA IT02364660445. Per qualsiasi richiesta:
+        <a href="mailto:ema@emanueledebenedictis.com">ema@emanueledebenedictis.com</a>
+      </p>
+
+      <h2>Quali dati raccolgo.</h2>
+      <p>
+        Solo quelli che scrivi nel modulo della pagina Parliamone: nome e cognome, azienda,
+        indirizzo email, numero di telefono se lo lasci, e le risposte alle tre domande sulla
+        tua attività. Non raccolgo altro e non compro elenchi di contatti.
+      </p>
+
+      <h2>Perché li raccolgo.</h2>
+      <p>
+        Per risponderti e per capire se posso esserti utile. Nient'altro: non ti iscrivo a
+        nessuna lista e non cedo i tuoi dati a nessuno per scopi commerciali.
+      </p>
+
+      <h2>Su quale base.</h2>
+      <p>
+        Li tratto per dare seguito alla tua richiesta, cioè per le misure precontrattuali che
+        chiedi tu stesso scrivendomi (articolo 6, paragrafo 1, lettera b del Regolamento europeo
+        2016/679).
+      </p>
+
+      <h2>Se non li dai.</h2>
+      <p>
+        Sei libero di non scrivermi. I campi contrassegnati come obbligatori servono a
+        risponderti: senza quelli non posso farlo.
+      </p>
+
+      <h2>Dove finiscono.</h2>
+      <p>
+        Il sito è ospitato su Netlify e anche il modulo è gestito da Netlify, che quindi
+        conserva i messaggi per mio conto. Netlify, Inc. ha sede negli Stati Uniti: il
+        trasferimento avviene sulla base delle garanzie previste dal Regolamento per i
+        trasferimenti fuori dall'Unione Europea. Non uso altri fornitori per i dati del modulo.
+      </p>
+
+      <h2>Per quanto tempo.</h2>
+      <p>
+        Conservo la richiesta per 24 mesi dall'ultimo contatto, poi la cancello, salvo che nel
+        frattempo sia nato un rapporto di lavoro con obblighi di conservazione previsti dalla
+        legge.
+      </p>
+
+      <h2>Cosa puoi chiedermi.</h2>
+      <p>
+        Puoi chiedermi di vedere i tuoi dati, correggerli, cancellarli, limitarne l'uso,
+        opporti al trattamento o averne una copia. Scrivimi a
+        <a href="mailto:ema@emanueledebenedictis.com">ema@emanueledebenedictis.com</a>
+        e ti rispondo entro un mese. Se ritieni che qualcosa non vada, puoi rivolgerti al
+        Garante per la protezione dei dati personali.
+      </p>
+
+      <h2>Cookie e statistiche.</h2>
+      <p>
+        Questo sito non usa cookie di profilazione, non ha strumenti di statistica e non
+        traccia la tua navigazione. I caratteri tipografici sono serviti da questo stesso sito,
+        quindi la tua visita non viene comunicata a servizi esterni.
+      </p>
+
+      <p class="tenue aggiornamento">Ultimo aggiornamento: 20 settembre 2026.</p>
+    </div>
+  </Sezione>
+  <style>
+    .aggiornamento { margin-top: 32px; font-size: 0.9rem; }
+  </style>
+</Base>
