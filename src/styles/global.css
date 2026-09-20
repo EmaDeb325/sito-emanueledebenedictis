@@ -4,6 +4,7 @@
   --testo: #F5F5F5;
   --testo-tenue: #A1A1AA;
   --accento: #3B82F6;
+  --accento-pieno: #1D4ED8;
   --bordo: rgba(255, 255, 255, 0.08);
   --raggio: 16px;
   --max: 1080px;
@@ -11,7 +12,10 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 
 body {
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -46,8 +50,8 @@ h3 { font-size: 1.12rem; font-weight: 600; }
   font-weight: 600; font-size: 0.98rem;
   transition: transform .15s ease, background .2s, border-color .2s;
 }
-.btn-primario { background: var(--accento); color: #fff; }
-.btn-primario:hover { transform: translateY(-2px); background: #2f74e8; }
+.btn-primario { background: var(--accento-pieno); color: #fff; }
+.btn-primario:hover { transform: translateY(-2px); background: #1E40AF; }
 .btn-secondario { border: 1px solid var(--bordo); color: var(--testo); }
 .btn-secondario:hover { transform: translateY(-2px); border-color: var(--accento); }
 

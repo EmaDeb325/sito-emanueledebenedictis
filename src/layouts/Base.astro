@@ -42,7 +42,7 @@ const voci = [
         <a href="/" class="marchio">Emanuele <span>De Benedictis</span></a>
         <nav>
           {voci.map((v) => (
-            <a href={v.href} class={attiva === v.testo ? 'attiva' : ''}>{v.testo}</a>
+            <a href={v.href} class={attiva === v.testo ? 'attiva' : ''} aria-current={attiva === v.testo ? 'page' : undefined}>{v.testo}</a>
           ))}
         </nav>
         <a href="/parliamone" class="btn btn-primario btn-nav">Parliamone</a>
