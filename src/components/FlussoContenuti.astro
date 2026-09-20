@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props { quanti?: number; }
+const { quanti = 3 } = Astro.props;
+
+const pezzi = (await getCollection('idee', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf())
+  .slice(0, quanti);
+
+const canali = (d: any) =>
+  [
+    { etichetta: 'Articolo', href: null },
+    { etichetta: 'Video', href: d.youtube },
+    { etichetta: 'Reel', href: d.reel },
+    { etichetta: 'LinkedIn', href: d.linkedin },
+  ].filter((c) => c.href !== undefined);
+---
+{pezzi.length === 0 ? (
+  <p class="tenue">Le prime pubblicazioni arrivano a giorni.</p>
+) : (
+  <div class="griglia griglia-3">
+    {pezzi.map((p) => (
+      <a class="card" href={`/idee/${p.id}`}>
+        <h3>{p.data.titolo}</h3>
+        <p class="tenue" style="margin-top: 10px;">{p.data.sommario}</p>
+        <p class="canali">
+          {canali(p.data).map((c) => <span>{c.etichetta}</span>)}
+        </p>
+      </a>
+    ))}
+  </div>
+)}
+<style>
+  .canali { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .canali span {
+    font-size: 0.74rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--accento); border: 1px solid var(--bordo); border-radius: 999px; padding: 4px 10px;
+  }
+</style>

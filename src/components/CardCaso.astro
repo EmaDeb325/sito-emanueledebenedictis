@@ -1,0 +1,9 @@
+---
+interface Props { caso: any; }
+const { caso } = Astro.props;
+---
+<a class="card" href={`/casi/${caso.id}`}>
+  {caso.data.stato === 'in-corso' && <span class="occhiello">In corso</span>}
+  <h3>{caso.data.categoria}</h3>
+  <p class="tenue" style="margin-top: 10px;">{caso.data.situazione}</p>
+</a>

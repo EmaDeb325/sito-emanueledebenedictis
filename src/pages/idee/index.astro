@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import Sezione from '../../components/Sezione.astro';
+import FlussoContenuti from '../../components/FlussoContenuti.astro';
+---
+<Base
+  titolo="Idee · AI applicata alla vendita e al marketing"
+  descrizione="Articoli, video e reel su come l'AI (intelligenza artificiale) moltiplica la vendita e il marketing di una piccola impresa."
+  attiva="Idee"
+>
+  <Sezione
+    occhiello="Idee"
+    titolo="Cosa produce Lucia"
+    intro="Ogni pezzo nasce una volta e vive su più canali: qui trovi l'articolo, e accanto le sue declinazioni in video e reel."
+  >
+    <FlussoContenuti quanti={50} />
+  </Sezione>
+</Base>

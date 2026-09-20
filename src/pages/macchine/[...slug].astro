@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Sezione from '../../components/Sezione.astro';
+
+export async function getStaticPaths() {
+  const macchine = await getCollection('macchine', ({ data }) => !data.draft);
+  return macchine.map((m) => ({ params: { slug: m.id }, props: { macchina: m } }));
+}
+
+const { macchina } = Astro.props;
+const { Content } = await render(macchina);
+---
+<Base titolo={macchina.data.nome} descrizione={macchina.data.cosaFa} attiva="Macchine">
+  <Sezione occhiello="Macchina" titolo={macchina.data.nome} intro={macchina.data.cosaFa}>
+    {macchina.data.video && (
+      <p class="bottoni"><a class="btn btn-secondario" href={macchina.data.video} target="_blank" rel="noopener">Guarda come lavora</a></p>
+    )}
+    <div class="card" style="margin-top: 24px;">
+      <h3>A chi serve</h3>
+      <p class="tenue" style="margin-top: 10px;">{macchina.data.aChiServe}</p>
+    </div>
+    <article class="testo"><Content /></article>
+    <p style="margin-top: 34px;"><a href="/parliamone" class="btn btn-primario">Ne voglio una così</a></p>
+  </Sezione>
+  <style>
+    .testo { max-width: 680px; margin-top: 24px; }
+    .testo :global(p) { margin-bottom: 16px; color: var(--testo-tenue); }
+    .bottoni { display: flex; gap: 12px; margin-top: 24px; }
+  </style>
+</Base>

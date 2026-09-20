@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Sezione from '../../components/Sezione.astro';
+
+export async function getStaticPaths() {
+  const pezzi = await getCollection('idee', ({ data }) => !data.draft);
+  return pezzi.map((p) => ({ params: { slug: p.id }, props: { pezzo: p } }));
+}
+
+const { pezzo } = Astro.props;
+const { Content } = await render(pezzo);
+const declinazioni = [
+  { etichetta: 'Guarda il video', href: pezzo.data.youtube },
+  { etichetta: 'Guarda il reel', href: pezzo.data.reel },
+  { etichetta: 'Leggi su LinkedIn', href: pezzo.data.linkedin },
+].filter((d) => d.href);
+---
+<Base titolo={pezzo.data.titolo} descrizione={pezzo.data.sommario} attiva="Idee">
+  <Sezione occhiello={pezzo.data.data.toLocaleDateString('it-IT')} titolo={pezzo.data.titolo}>
+    <article class="testo"><Content /></article>
+    {declinazioni.length > 0 && (
+      <p class="bottoni">
+        {declinazioni.map((d) => (
+          <a class="btn btn-secondario" href={d.href} target="_blank" rel="noopener">{d.etichetta}</a>
+        ))}
+      </p>
+    )}
+  </Sezione>
+  <style>
+    .testo { max-width: 680px; margin-top: 24px; }
+    .testo :global(h2) { margin: 32px 0 12px; }
+    .testo :global(p) { margin-bottom: 16px; color: var(--testo-tenue); }
+    .bottoni { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+  </style>
+</Base>

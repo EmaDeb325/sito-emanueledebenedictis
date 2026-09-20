@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Sezione from '../../components/Sezione.astro';
+
+export async function getStaticPaths() {
+  const casi = await getCollection('casi', ({ data }) => !data.draft);
+  return casi.map((c) => ({ params: { slug: c.id }, props: { caso: c } }));
+}
+
+const { caso } = Astro.props;
+const blocchi = [
+  ['La situazione', caso.data.situazione],
+  ['Cosa abbiamo costruito', caso.data.costruito],
+  [caso.data.stato === 'in-corso' ? 'Dove siamo adesso' : 'Il risultato', caso.data.risultato],
+  ['Cosa è rimasto in casa loro', caso.data.rimasto],
+];
+---
+<Base titolo={`Caso: ${caso.data.categoria}`} descrizione={caso.data.situazione} attiva="Casi">
+  <Sezione occhiello="Caso" titolo={caso.data.categoria}>
+    <div class="griglia griglia-2">
+      {blocchi.map(([titolo, testo]) => (
+        <div class="card">
+          <h3>{titolo}</h3>
+          <p class="tenue" style="margin-top: 10px;">{testo}</p>
+        </div>
+      ))}
+    </div>
+    <p style="margin-top: 34px;">
+      <a href="/parliamone" class="btn btn-primario">La tua situazione somiglia a questa? Parliamone</a>
+    </p>
+  </Sezione>
+</Base>
