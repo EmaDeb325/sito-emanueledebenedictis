@@ -1,0 +1,68 @@
+:root {
+  --bg: #0F0F0F;
+  --bg-soft: #171717;
+  --testo: #F5F5F5;
+  --testo-tenue: #A1A1AA;
+  --accento: #3B82F6;
+  --bordo: rgba(255, 255, 255, 0.08);
+  --raggio: 16px;
+  --max: 1080px;
+  --passo: 80px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--testo);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+section { padding: var(--passo) 0; }
+
+.occhiello {
+  display: inline-block;
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accento); margin-bottom: 14px;
+}
+
+h1 { font-size: clamp(2.1rem, 5.2vw, 3.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; }
+h2 { font-size: clamp(1.6rem, 3.6vw, 2.3rem); font-weight: 700; letter-spacing: -0.02em; }
+h3 { font-size: 1.12rem; font-weight: 600; }
+
+.tenue { color: var(--testo-tenue); }
+.intro { color: var(--testo-tenue); font-size: 1.05rem; max-width: 640px; margin-top: 14px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 26px; border-radius: 999px;
+  font-weight: 600; font-size: 0.98rem;
+  transition: transform .15s ease, background .2s, border-color .2s;
+}
+.btn-primario { background: var(--accento); color: #fff; }
+.btn-primario:hover { transform: translateY(-2px); background: #2f74e8; }
+.btn-secondario { border: 1px solid var(--bordo); color: var(--testo); }
+.btn-secondario:hover { transform: translateY(-2px); border-color: var(--accento); }
+
+.griglia { display: grid; gap: 18px; margin-top: 34px; }
+.griglia-2 { grid-template-columns: repeat(2, 1fr); }
+.griglia-3 { grid-template-columns: repeat(3, 1fr); }
+
+.card {
+  background: var(--bg-soft);
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  padding: 26px;
+}
+
+@media (max-width: 860px) {
+  .griglia-2, .griglia-3 { grid-template-columns: 1fr; }
+  :root { --passo: 56px; }
+}

@@ -1,0 +1,152 @@
+/* motion.css — movimento del sito, prodotto dalla skill transitions-dev.
+   Ogni blocco rispetta prefers-reduced-motion: chi lo richiede non vede
+   animazioni. Il testo principale dell'hero non riceve mai classi di
+   movimento: resta leggibile all'istante. */
+
+/* ---------------------------------------------------------------------
+   1. Comparsa allo scorrimento, con sfalsamento (stagger)
+   Fonte: transitions-dev, "Texts reveal" (18-texts-reveal.md), CSS
+   verbatim (estesa da 2 a 6 righe con la stessa formula documentata:
+   transition-delay: calc(--stagger-stagger * (N - 1))).
+   Uso futuro: avvolgere gli elementi da rivelare in .t-stagger, ogni
+   figlio riceve .t-stagger-line e un modificatore .t-stagger-line--N;
+   un IntersectionObserver (da collegare nel task che introduce gli
+   elementi reali) aggiunge .is-shown quando il blocco entra nel
+   viewport. Finche' nessun elemento usa queste classi, il blocco resta
+   inerte: non tocca nulla del markup gia' pubblicato.
+   --------------------------------------------------------------------- */
+:root {
+  --stagger-dur: 500ms;
+  --stagger-distance: 12px;
+  --stagger-stagger: 40ms;
+  --stagger-blur: 3px;
+  --stagger-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.t-stagger-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(var(--stagger-distance));
+  filter: blur(var(--stagger-blur));
+  transition:
+    opacity   var(--stagger-dur) var(--stagger-ease),
+    transform var(--stagger-dur) var(--stagger-ease),
+    filter    var(--stagger-dur) var(--stagger-ease);
+  will-change: transform, opacity, filter;
+}
+.t-stagger-line--2 { transition-delay: calc(var(--stagger-stagger) * 1); }
+.t-stagger-line--3 { transition-delay: calc(var(--stagger-stagger) * 2); }
+.t-stagger-line--4 { transition-delay: calc(var(--stagger-stagger) * 3); }
+.t-stagger-line--5 { transition-delay: calc(var(--stagger-stagger) * 4); }
+.t-stagger-line--6 { transition-delay: calc(var(--stagger-stagger) * 5); }
+
+.t-stagger.is-shown .t-stagger-line {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+/* Uscita disaccoppiata dallo stagger: un'unica dissolvenza silenziosa,
+   senza ritorno in Y e senza blur, cosi' la scomparsa non sembra una
+   rivelazione al contrario. */
+.t-stagger.is-hiding .t-stagger-line {
+  opacity: 0;
+  transform: translateY(0);
+  filter: blur(0);
+  transition:
+    opacity 200ms ease,
+    transform 0s linear,
+    filter 0s linear;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-stagger-line { transition: none !important; }
+}
+
+/* ---------------------------------------------------------------------
+   2. Sollevamento delle card al passaggio del mouse
+   Fonte: transitions-dev, "Avatar group hover" (11-avatar-group-hover.md):
+   stessi token (lift, durata, scala, curve) e lo stesso trucco per
+   l'easing "direzionale" (curva pulita in entrata, rimbalzo elastico al
+   ritorno), ottenuto qui in CSS puro con la coppia .card / .card:hover
+   invece che con lo script che sposta i vicini. Adattamento deliberato:
+   la versione originale muove anche i vicini con un "falloff" a
+   distanza, pensata per una fila orizzontale (avatar, chip); le nostre
+   .card sono tessere indipendenti in griglia, quindi teniamo solo il
+   sollevamento della tessera sotto il mouse. Le .card di global.css lo
+   ricevono gia' oggi, senza markup o script aggiuntivi.
+   --------------------------------------------------------------------- */
+:root {
+  --avatar-lift: -4px;
+  --avatar-dur: 320ms;
+  --avatar-scale: 1.05;
+  --avatar-ease-in: cubic-bezier(0.22, 1, 0.36, 1);
+  --avatar-ease-out: cubic-bezier(0.34, 3.85, 0.64, 1);
+}
+
+.card {
+  transform-origin: center;
+  transform: translateY(0) scale(1);
+  /* Curva di ritorno (con rimbalzo) quando il mouse esce. */
+  transition: transform var(--avatar-dur) var(--avatar-ease-out);
+  will-change: transform;
+}
+.card:hover {
+  transform: translateY(var(--avatar-lift)) scale(var(--avatar-scale));
+  /* Curva pulita quando il mouse entra. */
+  transition: transform var(--avatar-dur) var(--avatar-ease-in);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none !important; transform: none !important; }
+}
+
+/* ---------------------------------------------------------------------
+   3. Apertura del menu sul telefono
+   Fonte: transitions-dev, "Menu dropdown" (05-menu-dropdown.md), CSS
+   verbatim. Sotto 860px l'header nasconde <nav> (regola in Base.astro);
+   il bottone hamburger e lo script che alterna .is-open/.is-closing
+   sono lavoro di un task successivo. Qui prepariamo solo il movimento
+   del pannello, pronto per quando il trigger arriva.
+   --------------------------------------------------------------------- */
+:root {
+  --dropdown-open-dur: 250ms;
+  --dropdown-close-dur: 150ms;
+  --dropdown-pre-scale: 0.97;
+  --dropdown-closing-scale: 0.99;
+  --dropdown-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.t-dropdown {
+  transform-origin: top left;
+  transform: scale(var(--dropdown-pre-scale));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--dropdown-open-dur) var(--dropdown-ease),
+    opacity   var(--dropdown-open-dur) var(--dropdown-ease);
+  will-change: transform, opacity;
+}
+.t-dropdown[data-origin="top-right"]     { transform-origin: top right; }
+.t-dropdown[data-origin="top-center"]    { transform-origin: top center; }
+.t-dropdown[data-origin="bottom-left"]   { transform-origin: bottom left; }
+.t-dropdown[data-origin="bottom-center"] { transform-origin: bottom center; }
+.t-dropdown[data-origin="bottom-right"]  { transform-origin: bottom right; }
+
+.t-dropdown.is-open {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.t-dropdown.is-closing {
+  transform: scale(var(--dropdown-closing-scale));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--dropdown-close-dur) var(--dropdown-ease),
+    opacity   var(--dropdown-close-dur) var(--dropdown-ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-dropdown { transition: none !important; }
+}

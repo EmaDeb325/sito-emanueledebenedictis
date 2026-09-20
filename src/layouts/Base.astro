@@ -1,0 +1,80 @@
+---
+import '../styles/global.css';
+import '../styles/motion.css';
+
+interface Props {
+  titolo: string;
+  descrizione: string;
+  attiva?: string;
+}
+const { titolo, descrizione, attiva } = Astro.props;
+
+const voci = [
+  { href: '/metodo', testo: 'Metodo' },
+  { href: '/macchine', testo: 'Macchine' },
+  { href: '/casi', testo: 'Casi' },
+  { href: '/idee', testo: 'Idee' },
+  { href: '/chi-sono', testo: 'Chi sono' },
+];
+---
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titolo}</title>
+    <meta name="description" content={descrizione} />
+    <meta property="og:title" content={titolo} />
+    <meta property="og:description" content={descrizione} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a href="/" class="marchio">Emanuele <span>De Benedictis</span></a>
+        <nav>
+          {voci.map((v) => (
+            <a href={v.href} class={attiva === v.testo ? 'attiva' : ''}>{v.testo}</a>
+          ))}
+        </nav>
+        <a href="/parliamone" class="btn btn-primario btn-nav">Parliamone</a>
+      </div>
+    </header>
+
+    <main><slot /></main>
+
+    <footer>
+      <div class="wrap piede">
+        <small class="tenue">© 2026 Emanuele De Benedictis · P.IVA IT02364660445</small>
+        <a href="mailto:ema@emanueledebenedictis.com">ema@emanueledebenedictis.com</a>
+      </div>
+    </footer>
+
+    <style>
+      header {
+        position: sticky; top: 0; z-index: 50;
+        backdrop-filter: blur(12px);
+        background: rgba(15, 15, 15, 0.72);
+        border-bottom: 1px solid var(--bordo);
+      }
+      .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 20px; }
+      .marchio { font-weight: 700; letter-spacing: -0.02em; }
+      .marchio span { color: var(--accento); }
+      nav { display: flex; gap: 24px; }
+      nav a { color: var(--testo-tenue); font-size: 0.92rem; font-weight: 500; }
+      nav a:hover, nav a.attiva { color: var(--testo); }
+      .btn-nav { padding: 10px 18px; font-size: 0.9rem; }
+      footer { border-top: 1px solid var(--bordo); padding: 34px 0; }
+      .piede { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
+      @media (max-width: 860px) { nav { display: none; } }
+    </style>
+  </body>
+</html>

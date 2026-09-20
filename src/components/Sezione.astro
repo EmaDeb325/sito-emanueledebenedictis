@@ -1,0 +1,17 @@
+---
+interface Props {
+  occhiello?: string;
+  titolo?: string;
+  intro?: string;
+  sfondo?: boolean;
+}
+const { occhiello, titolo, intro, sfondo = false } = Astro.props;
+---
+<section style={sfondo ? 'background: var(--bg-soft);' : ''}>
+  <div class="wrap">
+    {occhiello && <span class="occhiello">{occhiello}</span>}
+    {titolo && <h2>{titolo}</h2>}
+    {intro && <p class="intro">{intro}</p>}
+    <slot />
+  </div>
+</section>
