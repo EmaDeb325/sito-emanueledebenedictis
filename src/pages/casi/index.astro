@@ -1,11 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Sezione from '../../components/Sezione.astro';
 import CardCaso from '../../components/CardCaso.astro';
+import { casiPubblicati } from '../../lib/contenuti';
 
-const casi = (await getCollection('casi', ({ data }) => !data.draft))
-  .sort((a, b) => a.data.ordine - b.data.ordine);
+const casi = await casiPubblicati();
 ---
 <Base
   titolo="Casi · lavori veri, raccontati per categoria"
@@ -15,10 +14,11 @@ const casi = (await getCollection('casi', ({ data }) => !data.draft))
   <Sezione
     occhiello="Casi"
     titolo="Aziende vere, lavori veri"
+    titoloPrincipale={true}
     intro="Racconto le situazioni per categoria di attività, senza nomi. Dove il risultato non è ancora misurato lo dico, e spiego cosa è stato consegnato."
   >
     {casi.length === 0 ? (
-      <p class="tenue">I primi casi arrivano a breve.</p>
+      <p class="attesa">I primi casi arrivano a breve.</p>
     ) : (
       <div class="griglia griglia-3">{casi.map((c) => <CardCaso caso={c} />)}</div>
     )}

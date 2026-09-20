@@ -4,6 +4,6 @@ const { macchina } = Astro.props;
 ---
 <a class="card" href={`/macchine/${macchina.id}`}>
   <h3>{macchina.data.nome}</h3>
-  <p class="tenue" style="margin-top: 10px;">{macchina.data.cosaFa}</p>
-  {macchina.data.video && <span class="occhiello" style="margin-top: 14px;">Con video</span>}
+  <p class="tenue">{macchina.data.cosaFa}</p>
+  {macchina.data.video && <span class="etichetta coda">Con video</span>}
 </a>

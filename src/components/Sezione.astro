@@ -4,13 +4,18 @@ interface Props {
   titolo?: string;
   intro?: string;
   sfondo?: boolean;
+  /* Sulle pagine senza hero il titolo di sezione e' anche il titolo della
+     pagina: esce come <h1> (per i lettori di schermo e per i motori di
+     ricerca) ma tiene l'aspetto dell'<h2>. */
+  titoloPrincipale?: boolean;
 }
-const { occhiello, titolo, intro, sfondo = false } = Astro.props;
+const { occhiello, titolo, intro, sfondo = false, titoloPrincipale = false } = Astro.props;
+const Titolo = titoloPrincipale ? 'h1' : 'h2';
 ---
-<section style={sfondo ? 'background: var(--bg-soft);' : ''}>
+<section class={sfondo ? 'morbida' : undefined}>
   <div class="wrap">
     {occhiello && <span class="occhiello">{occhiello}</span>}
-    {titolo && <h2>{titolo}</h2>}
+    {titolo && <Titolo class="titolo-sezione">{titolo}</Titolo>}
     {intro && <p class="intro">{intro}</p>}
     <slot />
   </div>

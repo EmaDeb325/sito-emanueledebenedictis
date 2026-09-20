@@ -1,0 +1,42 @@
+/* motion-tokens.css: la scala condivisa del movimento.
+   Installata dalla skill transitions-polish (_root.css). Tutto il
+   movimento del sito riferisce questi token, cosi' una ritaratura si fa in
+   un posto solo invece che a mano in ogni regola. Il commento accanto a
+   ogni token e' il suo USO documentato: si sceglie il token in base a cosa
+   fa il movimento, non in base al numero piu' vicino. */
+:root {
+  /* Durate */
+  --duration-stagger: 40ms;  /* sfalsamento per elemento */
+  --duration-micro: 80ms;  /* ritardo di intenzione, segmento di scossa */
+  --duration-quick: 150ms;  /* chiusura di tendina/finestra, scambio di testo */
+  --duration-fast: 250ms;  /* apertura di tendina/finestra, scambio di icona */
+  --duration-medium: 350ms;  /* chiusura di pannello, chiusura di avviso */
+  --duration-slow: 400ms;  /* apertura di pannello, comparsa del contenuto */
+  --duration-very-slow: 500ms;  /* momenti enfatici, comparsa di testo */
+
+  /* Curve */
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);  /* apertura e chiusura di superfici, scorrimenti, cambi di posizione */
+  --ease-in-out: ease-in-out;  /* scambio di icona o di testo */
+  --ease-out: ease-out;  /* comparsa e scomparsa di suggerimento */
+  --ease-linear: linear;  /* luccichio, pulsazione, rotazione */
+  --ease-bounce: cubic-bezier(0.34, 1.36, 0.64, 1);  /* comparsa elastica di una pastiglia */
+  --ease-bounce-strong: cubic-bezier(0.34, 3.85, 0.64, 1);  /* ritorno molleggiato dal passaggio del mouse */
+
+  /* Distanze */
+  --distance-micro: 4px;  /* scambio di testo */
+  --distance-small: 6px;  /* scossa breve */
+  --distance-base: 8px;  /* scorrimento di pagina, scossa ampia */
+  --distance-medium: 12px;  /* comparsa di testo */
+  --distance-large: 30px;  /* comparsa di una pastiglia di conferma */
+
+  /* Scale (valore di partenza, si assesta sempre a 1) */
+  --scale-large: 0.96;  /* apertura e chiusura di finestra */
+  --scale-medium: 0.97;  /* apertura di tendina */
+  --scale-small: 0.98;  /* apertura di suggerimento */
+  --scale-tiny: 0.99;  /* chiusura di tendina */
+
+  /* Sfocature (valore di partenza, si assesta sempre a 0) */
+  --blur-small: 2px;  /* comparsa di pannello, scambio di icona o testo */
+  --blur-medium: 3px;  /* scorrimento di pagina, comparsa di testo */
+  --blur-large: 8px;  /* apertura di una conferma */
+}

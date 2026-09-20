@@ -2,18 +2,13 @@
 import Base from '../layouts/Base.astro';
 import Sezione from '../components/Sezione.astro';
 import Hero from '../components/Hero.astro';
-import { getCollection } from 'astro:content';
+import { casiPubblicati, macchinePubblicate } from '../lib/contenuti';
 import FlussoContenuti from '../components/FlussoContenuti.astro';
 import CardCaso from '../components/CardCaso.astro';
 import CardMacchina from '../components/CardMacchina.astro';
 
-const primiCasi = (await getCollection('casi', ({ data }) => !data.draft))
-  .sort((a, b) => a.data.ordine - b.data.ordine)
-  .slice(0, 3);
-
-const primeMacchine = (await getCollection('macchine', ({ data }) => !data.draft))
-  .sort((a, b) => a.data.ordine - b.data.ordine)
-  .slice(0, 3);
+const primiCasi = await casiPubblicati(3);
+const primeMacchine = await macchinePubblicate(3);
 
 const ostacoli = [
   {
@@ -39,12 +34,33 @@ const ostacoli = [
 ];
 
 const fasi = [
-  ['Diagnosi', 'Guardiamo i numeri veri: da dove arrivano i clienti oggi, quanto vale un cliente, cosa si perde per strada.'],
-  ['Offerta', 'Rendiamo la tua offerta chiara e difficile da confrontare solo sul prezzo.'],
-  ['Messaggio', 'Scriviamo cosa dici, a chi lo dici e perché dovrebbe crederti.'],
-  ['La macchina', 'Costruiamo Lucia: gli automatismi che trovano, scaldano e richiamano i contatti al posto tuo.'],
-  ['Misura', 'Un cruscotto che parla di richieste, appuntamenti e fatturato. Non di like.'],
-  ['Passaggio di consegne', 'Le chiavi al tuo team, con istruzioni e formazione. Da lì cammina senza di me.'],
+  {
+    nome: 'Diagnosi',
+    testo:
+      'Guardiamo i numeri veri: da dove arrivano i clienti oggi, quanto vale un cliente, cosa si perde per strada.',
+  },
+  {
+    nome: 'Offerta',
+    testo: 'Rendiamo la tua offerta chiara e difficile da confrontare solo sul prezzo.',
+  },
+  {
+    nome: 'Messaggio',
+    testo: 'Scriviamo cosa dici, a chi lo dici e perché dovrebbe crederti.',
+  },
+  {
+    nome: 'La macchina',
+    testo:
+      'Costruiamo Lucia: gli automatismi che trovano, scaldano e richiamano i contatti al posto tuo.',
+  },
+  {
+    nome: 'Misura',
+    testo: 'Un cruscotto che parla di richieste, appuntamenti e fatturato. Non di like.',
+  },
+  {
+    nome: 'Passaggio di consegne',
+    testo:
+      'Le chiavi al tuo team, con istruzioni e formazione. Da lì cammina senza di me.',
+  },
 ];
 ---
 <Base
@@ -70,7 +86,7 @@ const fasi = [
       {ostacoli.map((o) => (
         <div class="card">
           <h3>{o.titolo}</h3>
-          <p class="tenue" style="margin-top: 10px;">{o.testo}</p>
+          <p class="tenue">{o.testo}</p>
         </div>
       ))}
     </div>
@@ -82,15 +98,15 @@ const fasi = [
     intro="Lucia è il nome del sistema: un impianto di AI che lavora sulla vendita e sul marketing. La mia la vedi all’opera su questo sito. La tua la costruiamo insieme, e resta in casa tua."
   >
     <div class="griglia griglia-3">
-      {fasi.map(([nome, testo], i) => (
+      {fasi.map((f, i) => (
         <div class="card">
-          <span class="occhiello">{String(i + 1).padStart(2, '0')}</span>
-          <h3>{nome}</h3>
-          <p class="tenue" style="margin-top: 10px;">{testo}</p>
+          <span class="numero-fase">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{f.nome}</h3>
+          <p class="tenue">{f.testo}</p>
         </div>
       ))}
     </div>
-    <p style="margin-top: 28px;">
+    <p class="cta">
       <a href="/metodo" class="btn btn-secondario">Vedi il percorso completo</a>
     </p>
   </Sezione>
@@ -100,8 +116,8 @@ const fasi = [
     intro="Gli articoli che leggi qui, i video, i reel, le campagne dei miei clienti: li produce una persona sola, con Lucia. Ogni pezzo nasce una volta e vive su quattro canali. Non te lo racconto: te lo faccio vedere, pezzo per pezzo."
     sfondo={true}
   >
-    <div style="margin-top: 34px;"><FlussoContenuti quanti={3} messaggioSeVuoto={false} /></div>
-    <p style="margin-top: 28px;">
+    <FlussoContenuti quanti={3} messaggioSeVuoto={false} />
+    <p class="cta">
       <a href="/idee" class="btn btn-secondario">Guarda cosa produce Lucia</a>
     </p>
   </Sezione>
@@ -113,7 +129,7 @@ const fasi = [
     {primeMacchine.length > 0 && (
       <div class="griglia griglia-3">{primeMacchine.map((m) => <CardMacchina macchina={m} />)}</div>
     )}
-    <p style="margin-top: 28px;">
+    <p class="cta">
       <a href="/macchine" class="btn btn-secondario">Entra nella sala macchine</a>
     </p>
   </Sezione>
@@ -126,7 +142,7 @@ const fasi = [
     {primiCasi.length > 0 && (
       <div class="griglia griglia-3">{primiCasi.map((c) => <CardCaso caso={c} />)}</div>
     )}
-    <p style="margin-top: 28px;">
+    <p class="cta">
       <a href="/casi" class="btn btn-secondario">Leggi i casi</a>
     </p>
   </Sezione>
@@ -138,7 +154,7 @@ const fasi = [
       il sistema che porta richieste, lo faccio funzionare con l’AI e poi lo consegno al team,
       con le istruzioni per governarlo.
     </p>
-    <p style="margin-top: 24px;">
+    <p class="cta">
       <a href="/chi-sono" class="btn btn-secondario">Come ci sono arrivato</a>
     </p>
   </Sezione>
@@ -148,7 +164,7 @@ const fasi = [
       Mi racconti a che punto sei, io ti dico con franchezza se e come posso essere utile.
       Se non è il caso te lo dico, e ti indico cosa farei al tuo posto.
     </p>
-    <p style="margin-top: 28px;">
+    <p class="cta">
       <a href="/parliamone" class="btn btn-primario">Prenota la call</a>
     </p>
   </Sezione>

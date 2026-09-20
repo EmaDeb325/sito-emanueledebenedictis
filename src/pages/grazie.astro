@@ -5,13 +5,14 @@ import Sezione from '../components/Sezione.astro';
 <Base
   titolo="Richiesta ricevuta · Emanuele De Benedictis"
   descrizione="La tua richiesta è arrivata: ti rispondo personalmente entro due giorni lavorativi."
+  noindex={true}
 >
-  <Sezione titolo="Richiesta ricevuta.">
+  <Sezione titolo="Richiesta ricevuta." titoloPrincipale={true}>
     <p class="intro">
       Ti rispondo personalmente entro due giorni lavorativi. Se nel frattempo vuoi farti un'idea
       di come lavoro, qui trovi quello che produco.
     </p>
-    <p style="margin-top: 28px;">
+    <p class="cta">
       <a href="/idee" class="btn btn-secondario">Guarda cosa produce Lucia</a>
     </p>
   </Sezione>

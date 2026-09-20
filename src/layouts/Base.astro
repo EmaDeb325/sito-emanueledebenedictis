@@ -1,4 +1,5 @@
 ---
+import '../styles/motion-tokens.css';
 import '../styles/global.css';
 import '../styles/motion.css';
 
@@ -6,8 +7,12 @@ interface Props {
   titolo: string;
   descrizione: string;
   attiva?: string;
+  noindex?: boolean;
 }
-const { titolo, descrizione, attiva } = Astro.props;
+const { titolo, descrizione, attiva, noindex = false } = Astro.props;
+
+const canonico = new URL(Astro.url.pathname, Astro.site).href;
+const anteprima = new URL('/foto.jpg', Astro.site).href;
 
 const voci = [
   { href: '/metodo', testo: 'Metodo' },
@@ -24,10 +29,21 @@ const voci = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{titolo}</title>
     <meta name="description" content={descrizione} />
+    <link rel="canonical" href={canonico} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:title" content={titolo} />
     <meta property="og:description" content={descrizione} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="it_IT" />
+    <meta property="og:url" content={canonico} />
+    <meta property="og:image" content={anteprima} />
+    <meta property="og:image:width" content="760" />
+    <meta property="og:image:height" content="950" />
+    <meta property="og:image:alt" content="Emanuele De Benedictis" />
+    <meta name="twitter:card" content="summary" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,10 +53,12 @@ const voci = [
     />
   </head>
   <body>
+    <a href="#contenuto" class="salta">Salta al contenuto</a>
+
     <header>
       <div class="wrap nav">
         <a href="/" class="marchio">Emanuele <span>De Benedictis</span></a>
-        <nav>
+        <nav aria-label="Principale">
           {voci.map((v) => (
             <a href={v.href} class={attiva === v.testo ? 'attiva' : ''} aria-current={attiva === v.testo ? 'page' : undefined}>{v.testo}</a>
           ))}
@@ -49,7 +67,7 @@ const voci = [
       </div>
     </header>
 
-    <main><slot /></main>
+    <main id="contenuto"><slot /></main>
 
     <footer>
       <div class="wrap piede">
@@ -61,9 +79,13 @@ const voci = [
     <style>
       header {
         position: sticky; top: 0; z-index: 50;
-        backdrop-filter: blur(12px);
-        background: rgba(15, 15, 15, 0.72);
+        /* A 0.72 di opacita' il contenuto che scorreva sotto trasformava
+           l'intestazione in una macchia irregolare. Piu' velo, un filo di
+           saturazione e un riflesso di un pixel sul bordo alto. */
+        backdrop-filter: blur(14px) saturate(140%);
+        background: rgba(15, 15, 15, 0.86);
         border-bottom: 1px solid var(--bordo);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
       }
       .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 20px; }
       .marchio { font-weight: 700; letter-spacing: -0.02em; }
@@ -74,7 +96,35 @@ const voci = [
       .btn-nav { padding: 10px 18px; font-size: 0.9rem; }
       footer { border-top: 1px solid var(--bordo); padding: 34px 0; }
       .piede { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
-      @media (max-width: 860px) { nav { display: none; } }
+
+      /* Sotto 860px il menu spariva del tutto e sul telefono il sito
+         restava senza navigazione. Qui l'intestazione va su due righe:
+         marchio e bottone sopra, le voci sotto. Nessuno script, nessun
+         pannello da aprire. */
+      @media (max-width: 860px) {
+        .nav {
+          height: auto;
+          flex-wrap: wrap;
+          row-gap: 8px;
+          padding-top: 10px;
+          padding-bottom: 6px;
+        }
+        .marchio { order: 1; }
+        .btn-nav { order: 2; }
+        nav {
+          order: 3;
+          width: 100%;
+          gap: 10px;
+          justify-content: space-between;
+          border-top: 1px solid var(--bordo);
+          padding-top: 4px;
+        }
+        nav a { font-size: 0.86rem; padding: 7px 0; }
+      }
+      @media (max-width: 380px) {
+        .marchio { font-size: 0.95rem; }
+        nav a { font-size: 0.82rem; }
+      }
     </style>
   </body>
 </html>

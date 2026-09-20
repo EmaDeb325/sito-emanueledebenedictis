@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import Sezione from '../components/Sezione.astro';
+
+const strade = [
+  { href: '/metodo', testo: 'Come nasce una Lucia' },
+  { href: '/macchine', testo: 'Le macchine' },
+  { href: '/casi', testo: 'I casi' },
+  { href: '/idee', testo: 'Le idee' },
+];
+---
+<Base
+  titolo="Pagina non trovata · Emanuele De Benedictis"
+  descrizione="Questa pagina non esiste. Da qui si torna alle sezioni del sito."
+  noindex={true}
+>
+  <Sezione
+    occhiello="404"
+    titolo="Questa pagina non c'è."
+    titoloPrincipale={true}
+    intro="O l'indirizzo è sbagliato, o la pagina si è spostata. Da qui si riparte."
+  >
+    <p class="bottoni">
+      <a href="/" class="btn btn-primario">Torna alla home</a>
+      {strade.map((s) => (
+        <a href={s.href} class="btn btn-secondario">{s.testo}</a>
+      ))}
+    </p>
+  </Sezione>
+</Base>

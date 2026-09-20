@@ -49,21 +49,35 @@ const fasi = [
   <Sezione
     occhiello="Il metodo"
     titolo="Come nasce una Lucia"
+    titoloPrincipale={true}
     intro="Lucia è il nome dell'impianto: un sistema di AI (intelligenza artificiale) che lavora sulla vendita e sul marketing. Non è un pacchetto uguale per tutti: si costruisce sui tuoi numeri e resta a casa tua. Sei fasi, in questo ordine, perché ognuna regge la successiva."
   >
-    <div class="griglia">
+    <div class="griglia griglia-2">
       {fasi.map((f, i) => (
         <div class="card">
-          <span class="occhiello">Fase {String(i + 1).padStart(2, '0')}</span>
+          <span class="numero-fase">Fase {String(i + 1).padStart(2, '0')}</span>
           <h3>{f.nome}</h3>
-          <p class="tenue" style="margin-top: 10px;">{f.cosa}</p>
-          <p class="tenue" style="margin-top: 14px;"><strong>Cosa serve da te:</strong> {f.serve}</p>
-          <p class="tenue" style="margin-top: 6px;"><strong>Cosa hai in mano alla fine:</strong> {f.ottieni}</p>
+          <p class="tenue">{f.cosa}</p>
+          <div class="dettagli">
+            <p class="tenue"><strong class="voce">Cosa serve da te:</strong> {f.serve}</p>
+            <p class="tenue"><strong class="voce">Cosa hai in mano alla fine:</strong> {f.ottieni}</p>
+          </div>
         </div>
       ))}
     </div>
-    <p style="margin-top: 34px;">
+    <p class="cta">
       <a href="/parliamone" class="btn btn-primario">Capiamo da quale fase parti</a>
     </p>
   </Sezione>
+  <style>
+    /* Le sei fasi stavano in colonna unica a tutta larghezza: righe da
+       ~110 caratteri. Su due colonne la misura scende sotto i 70. */
+    .dettagli {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--bordo);
+    }
+    .dettagli p + p { margin-top: 8px; }
+    .voce { color: var(--testo); font-weight: 600; }
+  </style>
 </Base>

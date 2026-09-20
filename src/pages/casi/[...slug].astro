@@ -1,32 +1,35 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Sezione from '../../components/Sezione.astro';
+import { casiPubblicati } from '../../lib/contenuti';
 
 export async function getStaticPaths() {
-  const casi = await getCollection('casi', ({ data }) => !data.draft);
+  const casi = await casiPubblicati();
   return casi.map((c) => ({ params: { slug: c.id }, props: { caso: c } }));
 }
 
 const { caso } = Astro.props;
 const blocchi = [
-  ['La situazione', caso.data.situazione],
-  ['Cosa abbiamo costruito', caso.data.costruito],
-  [caso.data.stato === 'in-corso' ? 'Dove siamo adesso' : 'Il risultato', caso.data.risultato],
-  ['Cosa è rimasto in casa loro', caso.data.rimasto],
+  { titolo: 'La situazione', testo: caso.data.situazione },
+  { titolo: 'Cosa abbiamo costruito', testo: caso.data.costruito },
+  {
+    titolo: caso.data.stato === 'in-corso' ? 'Dove siamo adesso' : 'Il risultato',
+    testo: caso.data.risultato,
+  },
+  { titolo: 'Cosa è rimasto in casa loro', testo: caso.data.rimasto },
 ];
 ---
 <Base titolo={`Caso: ${caso.data.categoria}`} descrizione={caso.data.situazione} attiva="Casi">
-  <Sezione occhiello="Caso" titolo={caso.data.categoria}>
+  <Sezione occhiello="Caso" titolo={caso.data.categoria} titoloPrincipale={true}>
     <div class="griglia griglia-2">
-      {blocchi.map(([titolo, testo]) => (
+      {blocchi.map((b) => (
         <div class="card">
-          <h3>{titolo}</h3>
-          <p class="tenue" style="margin-top: 10px;">{testo}</p>
+          <h3>{b.titolo}</h3>
+          <p class="tenue">{b.testo}</p>
         </div>
       ))}
     </div>
-    <p style="margin-top: 34px;">
+    <p class="cta">
       <a href="/parliamone" class="btn btn-primario">La tua situazione somiglia a questa? Parliamone</a>
     </p>
   </Sezione>

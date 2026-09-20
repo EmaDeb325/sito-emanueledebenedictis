@@ -1,12 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
+import { ideePubblicate } from '../lib/contenuti';
 
 interface Props { quanti?: number; messaggioSeVuoto?: boolean; }
 const { quanti = 3, messaggioSeVuoto = true } = Astro.props;
 
-const pezzi = (await getCollection('idee', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf())
-  .slice(0, quanti);
+const pezzi = await ideePubblicate(quanti);
 
 const canali = (d: any) =>
   [
@@ -17,13 +15,13 @@ const canali = (d: any) =>
   ].filter((c) => c.href !== undefined);
 ---
 {pezzi.length === 0 ? (
-  messaggioSeVuoto && <p class="tenue">Le prime pubblicazioni arrivano a giorni.</p>
+  messaggioSeVuoto && <p class="attesa">Le prime pubblicazioni arrivano a giorni.</p>
 ) : (
   <div class="griglia griglia-3">
     {pezzi.map((p) => (
       <a class="card" href={`/idee/${p.id}`}>
         <h3>{p.data.titolo}</h3>
-        <p class="tenue" style="margin-top: 10px;">{p.data.sommario}</p>
+        <p class="tenue">{p.data.sommario}</p>
         <p class="canali">
           {canali(p.data).map((c) => <span>{c.etichetta}</span>)}
         </p>

@@ -1,0 +1,14 @@
+# Fine riga normalizzata: in repository sempre LF, in locale su Windows
+# quello che serve all'editor. Senza questo file ogni commit stampava
+# l'avviso "LF will be replaced by CRLF".
+* text=auto eol=lf
+
+# File binari: git non deve toccarli.
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary

@@ -1,11 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Sezione from '../../components/Sezione.astro';
 import CardMacchina from '../../components/CardMacchina.astro';
+import { macchinePubblicate } from '../../lib/contenuti';
 
-const macchine = (await getCollection('macchine', ({ data }) => !data.draft))
-  .sort((a, b) => a.data.ordine - b.data.ordine);
+const macchine = await macchinePubblicate();
 ---
 <Base
   titolo="Macchine · sistemi di AI che si vedono funzionare"
@@ -15,10 +14,11 @@ const macchine = (await getCollection('macchine', ({ data }) => !data.draft))
   <Sezione
     occhiello="Le macchine"
     titolo="Sistemi che si vedono funzionare"
+    titoloPrincipale={true}
     intro="Non presentazioni: cose accese. Ognuna è un pezzo di Lucia che puoi avere anche tu."
   >
     {macchine.length === 0 ? (
-      <p class="tenue">Le prime macchine arrivano a breve.</p>
+      <p class="attesa">Le prime macchine arrivano a breve.</p>
     ) : (
       <div class="griglia griglia-3">{macchine.map((m) => <CardMacchina macchina={m} />)}</div>
     )}

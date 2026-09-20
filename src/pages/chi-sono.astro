@@ -7,7 +7,7 @@ import Sezione from '../components/Sezione.astro';
   descrizione="Lavoro con titolari di piccole e medie imprese che hanno costruito l'azienda vendendo in prima persona e ora non riescono più a starci dietro."
   attiva="Chi sono"
 >
-  <Sezione occhiello="Chi sono" titolo="Emanuele De Benedictis">
+  <Sezione occhiello="Chi sono" titolo="Emanuele De Benedictis" titoloPrincipale={true}>
     <div class="due">
       <div>
         <p class="intro">
@@ -32,16 +32,25 @@ import Sezione from '../components/Sezione.astro';
           prodotti con lei. È esattamente la dimostrazione di quello che vendo: una persona sola
           che presidia quattro canali.
         </p>
-        <p style="margin-top: 28px;">
+        <p class="cta">
           <a href="/parliamone" class="btn btn-primario">Parliamone</a>
         </p>
       </div>
-      <img src="/foto.jpg" alt="Emanuele De Benedictis" />
+      <img
+        src="/foto.jpg"
+        alt="Emanuele De Benedictis"
+        width="760"
+        height="950"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   </Sezione>
   <style>
     .due { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; margin-top: 24px; }
-    .due img { width: 100%; border-radius: var(--raggio); border: 1px solid var(--bordo); }
+    /* width e height dichiarati nel markup: senza, la pagina salta
+       quando la foto finisce di caricarsi. */
+    .due img { width: 100%; height: auto; border-radius: var(--raggio); border: 1px solid var(--bordo); }
     .due .intro { margin-top: 0; margin-bottom: 16px; }
     @media (max-width: 860px) { .due { grid-template-columns: 1fr; } }
   </style>

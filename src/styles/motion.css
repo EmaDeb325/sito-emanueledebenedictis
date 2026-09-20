@@ -1,26 +1,35 @@
-/* motion.css: movimento del sito, prodotto dalla skill transitions-dev.
+/* motion.css: movimento del sito, prodotto dalla skill transitions-dev e
+   tarato dalla skill transitions-polish sulla scala di motion-tokens.css.
    Ogni blocco rispetta prefers-reduced-motion: chi lo richiede non vede
    animazioni. Il testo principale dell'hero non riceve mai classi di
    movimento: resta leggibile all'istante. */
 
 /* ---------------------------------------------------------------------
    1. Comparsa allo scorrimento, con sfalsamento (stagger)
-   Fonte: transitions-dev, "Texts reveal" (18-texts-reveal.md), CSS
-   verbatim (estesa da 2 a 6 righe con la stessa formula documentata:
-   transition-delay: calc(--stagger-stagger * (N - 1))).
+   Fonte: transitions-dev, "Texts reveal" (18-texts-reveal.md), estesa da
+   2 a 6 righe con la stessa formula documentata:
+   transition-delay: calc(--stagger-stagger * (N - 1)).
    Uso futuro: avvolgere gli elementi da rivelare in .t-stagger, ogni
    figlio riceve .t-stagger-line e un modificatore .t-stagger-line--N;
    un IntersectionObserver (da collegare nel task che introduce gli
    elementi reali) aggiunge .is-shown quando il blocco entra nel
-   viewport. Finché nessun elemento usa queste classi, il blocco resta
-   inerte: non tocca nulla del markup già pubblicato.
+   viewport. Finche' nessun elemento usa queste classi, il blocco resta
+   inerte: non tocca nulla del markup gia' pubblicato.
+
+   Taratura: 6 righe x 40ms di sfalsamento = 200ms complessivi, sotto il
+   tetto di ~300ms oltre il quale l'ultima riga arriva in ritardo.
    --------------------------------------------------------------------- */
 :root {
-  --stagger-dur: 500ms;
-  --stagger-distance: 12px;
-  --stagger-stagger: 40ms;
-  --stagger-blur: 3px;
-  --stagger-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --stagger-dur: var(--duration-very-slow);
+  --stagger-distance: var(--distance-medium);
+  --stagger-stagger: var(--duration-stagger);
+  --stagger-blur: var(--blur-medium);
+  /* Curva in decelerazione: su un'entrata con spostamento una curva che
+     accelera all'inizio farebbe partire il testo di scatto. */
+  --stagger-ease: var(--ease-smooth-out);
+  /* La scomparsa e' piu' rapida dell'apertura: chiudere e' togliersi di
+     mezzo, non una seconda rivelazione. */
+  --stagger-dur-uscita: var(--duration-quick);
 }
 
 .t-stagger-line {
@@ -46,16 +55,16 @@
   filter: blur(0);
 }
 /* Uscita disaccoppiata dallo stagger: un'unica dissolvenza silenziosa,
-   senza ritorno in Y e senza blur, così la scomparsa non sembra una
-   rivelazione al contrario. */
+   senza ritorno in Y, senza sfocatura e senza ritardo, cosi' la scomparsa
+   non sembra una rivelazione al contrario. */
 .t-stagger.is-hiding .t-stagger-line {
   opacity: 0;
   transform: translateY(0);
   filter: blur(0);
   transition:
-    opacity 200ms ease,
+    opacity   var(--stagger-dur-uscita) var(--ease-smooth-out),
     transform 0s linear,
-    filter 0s linear;
+    filter    0s linear;
   transition-delay: 0s;
 }
 
@@ -64,57 +73,80 @@
 }
 
 /* ---------------------------------------------------------------------
-   2. Sollevamento delle card al passaggio del mouse
+   2. Sollevamento delle card cliccabili al passaggio del mouse
    Fonte: transitions-dev, "Avatar group hover" (11-avatar-group-hover.md):
-   stessi token (lift, durata, scala, curve) e lo stesso trucco per
-   l'easing "direzionale" (curva pulita in entrata, rimbalzo elastico al
-   ritorno), ottenuto qui in CSS puro con la coppia .card / .card:hover
-   invece che con lo script che sposta i vicini. Adattamento deliberato:
-   la versione originale muove anche i vicini con un "falloff" a
-   distanza, pensata per una fila orizzontale (avatar, chip); le nostre
-   .card sono tessere indipendenti in griglia, quindi teniamo solo il
-   sollevamento della tessera sotto il mouse. Le .card di global.css lo
-   ricevono già oggi, senza markup o script aggiuntivi.
+   stessi token e lo stesso trucco per l'easing "direzionale" (curva
+   pulita in entrata, rimbalzo elastico al ritorno), ottenuto qui in CSS
+   puro con la coppia a.card / a.card:hover invece che con lo script che
+   sposta i vicini. Adattamento deliberato: la versione originale muove
+   anche i vicini con un "falloff" a distanza, pensata per una fila
+   orizzontale (avatar, chip); le nostre card sono tessere indipendenti in
+   griglia, quindi teniamo solo il sollevamento della tessera sotto il
+   mouse.
+
+   Due precisazioni rispetto alla versione precedente:
+   - il movimento vale solo per a.card, cioe' le card che sono davvero un
+     link: sollevare una card non cliccabile prometteva un clic che non
+     c'era;
+   - entrata e uscita hanno durate diverse. La regola hover e' l'unico
+     punto in cui l'uscita e' piu' elaborata dell'entrata: entrata rapida
+     e diretta, ritorno piu' lungo perche' la curva molleggiata abbia il
+     tempo di assestarsi invece di scattare.
    --------------------------------------------------------------------- */
 :root {
   --avatar-lift: -4px;
-  --avatar-dur: 320ms;
-  --avatar-scale: 1.05;
-  --avatar-ease-in: cubic-bezier(0.22, 1, 0.36, 1);
-  --avatar-ease-out: cubic-bezier(0.34, 3.85, 0.64, 1);
+  /* Crescita contenuta: su una griglia a tre colonne il vecchio 1.05
+     mangiava quasi tutto lo spazio fra una tessera e l'altra. */
+  --avatar-scale: 1.02;
+  --avatar-dur-in: var(--duration-fast);
+  --avatar-dur-out: var(--duration-medium);
+  --avatar-ease-in: var(--ease-smooth-out);
+  --avatar-ease-out: var(--ease-bounce-strong);
 }
 
-.card {
+a.card {
   transform-origin: center;
   transform: translateY(0) scale(1);
   /* Curva di ritorno (con rimbalzo) quando il mouse esce. */
-  transition: transform var(--avatar-dur) var(--avatar-ease-out);
+  transition:
+    transform var(--avatar-dur-out) var(--avatar-ease-out),
+    border-color var(--duration-quick) var(--ease-smooth-out);
   will-change: transform;
 }
-.card:hover {
+a.card:hover {
   transform: translateY(var(--avatar-lift)) scale(var(--avatar-scale));
-  /* Curva pulita quando il mouse entra. */
-  transition: transform var(--avatar-dur) var(--avatar-ease-in);
+  border-color: var(--accento);
+  /* Curva pulita e piu' breve quando il mouse entra. */
+  transition:
+    transform var(--avatar-dur-in) var(--avatar-ease-in),
+    border-color var(--duration-quick) var(--ease-smooth-out);
+}
+a.card:active {
+  transform: translateY(0) scale(0.995);
+  transition: transform var(--duration-quick) var(--ease-smooth-out);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card { transition: none !important; transform: none !important; }
+  a.card { transition: none !important; transform: none !important; }
 }
 
 /* ---------------------------------------------------------------------
-   3. Apertura del menu sul telefono
-   Fonte: transitions-dev, "Menu dropdown" (05-menu-dropdown.md), CSS
-   verbatim. Sotto 860px l'header nasconde <nav> (regola in Base.astro);
-   il bottone hamburger e lo script che alterna .is-open/.is-closing
-   sono lavoro di un task successivo. Qui prepariamo solo il movimento
-   del pannello, pronto per quando il trigger arriva.
+   3. Apertura di un pannello a tendina
+   Fonte: transitions-dev, "Menu dropdown" (05-menu-dropdown.md).
+   Blocco inerte: nessun elemento usa oggi .t-dropdown. Era stato
+   preparato per il menu del telefono, che pero' e' stato risolto
+   mandando l'intestazione su due righe, senza pannello da aprire. Lo
+   lascio in attesa di una decisione: i valori sono gia' tutti sulla
+   scala (apertura 250ms / chiusura 150ms, pre-scala 0,97 / 0,99, nessun
+   ritardo in chiusura), quindi l'asimmetria apertura-chiusura qui era
+   gia' corretta.
    --------------------------------------------------------------------- */
 :root {
-  --dropdown-open-dur: 250ms;
-  --dropdown-close-dur: 150ms;
-  --dropdown-pre-scale: 0.97;
-  --dropdown-closing-scale: 0.99;
-  --dropdown-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dropdown-open-dur: var(--duration-fast);
+  --dropdown-close-dur: var(--duration-quick);
+  --dropdown-pre-scale: var(--scale-medium);
+  --dropdown-closing-scale: var(--scale-tiny);
+  --dropdown-ease: var(--ease-smooth-out);
 }
 
 .t-dropdown {
