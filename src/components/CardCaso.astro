@@ -1,5 +1,7 @@
 ---
-interface Props { caso: any; }
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { caso: CollectionEntry<'casi'>; }
 const { caso } = Astro.props;
 ---
 <a class="card" href={`/casi/${caso.id}`}>

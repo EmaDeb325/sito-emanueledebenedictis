@@ -1,5 +1,7 @@
 ---
-interface Props { macchina: any; }
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { macchina: CollectionEntry<'macchine'>; }
 const { macchina } = Astro.props;
 ---
 <a class="card" href={`/macchine/${macchina.id}`}>

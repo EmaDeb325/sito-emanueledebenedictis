@@ -1,7 +1,7 @@
 ---
-categoria: Un concessionario di camper e van con tre sedi
+categoria: Un concessionario di camper e van
 situazione: >
-  La stagione si gioca in poche settimane intorno alla fiera di settembre: se in quei giorni la
+  La stagione si gioca in poche settimane intorno alla fiera di stagione: se in quei giorni la
   domanda non arriva, l'anno è compromesso. Le richieste arrivavano a ondate, senza un sistema
   per raccoglierle e smistarle tra le sedi.
 costruito: >

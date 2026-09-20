@@ -10,6 +10,10 @@ node_modules/
 # Foto originale pesante (sul sito usiamo foto.jpg ottimizzata)
 foto_emanuele.jpg
 
+# Cartella dei file originali pesanti (fuori da public/, quindi fuori
+# dalla build): non deve mai finire nel repository
+originali/
+
 # Materiale strategico interno: NON deve finire sul repo pubblico
 202606_Emanuele_Marketing_Strategico/
 

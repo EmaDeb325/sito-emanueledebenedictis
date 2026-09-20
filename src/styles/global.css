@@ -122,7 +122,7 @@ section.morbida + section.morbida {
   border: 0;
 }
 
-h1 { font-size: clamp(2.1rem, 5.2vw, 3.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; }
+h1 { font-size: clamp(1.8rem, 6.4vw, 3.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; }
 /* h2 e h3 ereditavano line-height 1.6 dal body: su due righe il titolo si
    sfaldava e non reggeva il confronto con l'h1. */
 h2 { font-size: clamp(1.6rem, 3.6vw, 2.3rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.16; }
